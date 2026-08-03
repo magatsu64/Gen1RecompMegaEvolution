@@ -1,0 +1,34 @@
+{
+  "id": "kanto_mega_evolutions",
+  "name": "Kanto Mega Evolutions",
+  "version": "1.0.0",
+  "api": 2,
+  "entry": "main.lua",
+  "category": "MECHANIC",
+  "game_version": ">=0.1.0 <1.0.0",
+  "dependencies": ["fairy_dark_steel_types"],
+  "permissions": ["engine_internals"],
+  "assets_transforms": "transforms.lua",
+  "summary": "Adds all 18 Kanto species with a Mega Evolution in Pokemon Legends Z-A (21 forms total, 3 with X/Y pairs), with real Z-A stats/typing and a Mega Evolve option in battle. Supersedes the standalone mega_charizard_x mod -- don't run both together.",
+  "author": "you",
+  "tags": ["mechanic", "battle-ui", "intermediate"],
+  "differences": [
+    "Registers 21 battle-only species records (stats/typing/sprite only -- never caught, seen, or encountered) for every Kanto Mega form in Pokemon Legends Z-A: Venusaur, Charizard X/Y, Blastoise, Beedrill, Pidgeot, Raichu X/Y, Alakazam, Slowbro, Gengar, Victreebel, Starmie, Clefable, Kangaskhan, Pinsir, Gyarados, Aerodactyl, Dragonite, Mewtwo X/Y",
+    "Depends on fairy_dark_steel_types for Gyarados's Dark typing and Clefable's Fairy typing",
+    "Overrides three core battle functions (BattleState.update, BattleState.drawTextArea, BattleState.draw), same engine_internals justification as mega_charizard_x (no hook exists for adding a menu option to the battle screen)",
+    "The MEGA indicator sits on the TYPE/PP box's decorative top border row now, not its interior text rows -- it no longer covers the type/PP readout",
+    "For Charizard, Raichu, and Mewtwo, pressing A on the indicator opens a second box asking X or Y before transforming; every other species transforms on a direct confirm",
+    "known: 14 of the 21 forms are placeholder recolors of each species' own vanilla sprite (see transforms.lua) -- real Mega designs mostly have genuine shape changes a recolor can't capture. Charizard X, Charizard Y, Venusaur, Blastoise, Raichu X, Raichu Y, and Clefable have real custom art",
+    "known: Special is the average of Z-A's real Sp. Atk and Sp. Def for every form, since Gen 1 has one unified Special stat -- not a real Legends: Z-A number for any of them",
+    "known: catchRate/baseExp/growthRate/level1Moves are uniform placeholders across all 21 forms, since none of these fields are ever read for a species that's never caught, leveled, or taught a move",
+    "known: no held-item system exists in this engine, so there's no real Mega Stone trigger -- the button is the substitute, same as mega_charizard_x",
+    "SUPERSEDES mega_charizard_x -- do not run both mods together, they would each independently wrap the same BattleState functions and conflict",
+    "BLAZIKEN_MEGA is included as a Mega record only, not the real Kanto roster -- Blaziken is Gen 3 (Hoenn). Requires a separate mod providing the real base BLAZIKEN species; placeholder art until real Mega Blaziken art exists"
+  ],
+  "credits": [
+    "Mega Evolution stats and designs from Pokemon Legends: Z-A",
+    "Clefable and Raichu X/Y sprites: FrenchOrange (DeviantArt) -- https://www.deviantart.com/frenchorange -- 'free to use as long as proper credit is given', per the artist's own posted terms",
+    "Aerodactyl, Alakazam, Beedrill, Blastoise, Blaziken, Charizard X, Charizard Y, Venusaur, Gengar, and Pinsir sprites: sourced from crystaldex.vercel.app, used with the site/artist's permission granted directly to the mod author",
+    "Slowbro, Victreebel, Gyarados, and Dragonite sprites: from Pokemon Low Budget Crystal"
+  ]
+}

@@ -1,0 +1,44 @@
+-- Sharing metadata (25-community-and-ecosystem.md 3.2). Read by tooling
+-- and the manager detail pane; never by the loader's merge.
+
+return {
+  summary = "All 18 Kanto species with a real Mega Evolution in Pokemon Legends: Z-A (21 forms), with real Z-A stats and a Mega Evolve option in battle.",
+
+  author = "you",
+  contact = "https://github.com/YOUR_USERNAME/kanto-mega-evolutions",
+
+  tags = { "pokemon", "mega-evolution", "kanto", "battle-ui", "z-a" },
+
+  differences = {
+    changed = {
+      "Charizard, Raichu, and Mewtwo each get a Mega Evolve option with an X/Y picker; every other species gets a direct confirm box",
+      "the MEGA indicator sits in the blank margin to the left of the move list, not inside the TYPE/PP box",
+    },
+
+    added = {
+      "21 battle-only species records (stats/typing/sprite only) for every Kanto Mega form: Venusaur, Charizard X/Y, Blastoise, Beedrill, Pidgeot, Raichu X/Y, Alakazam, Slowbro, Gengar, Victreebel, Starmie, Clefable, Kangaskhan, Pinsir, Gyarados, Aerodactyl, Dragonite, Mewtwo X/Y",
+      "a MEGA option on the move-select screen (Left to focus, A to open, confirm or pick X/Y)",
+      "a black/white flash and a small M icon by the HP bar once Mega Evolved",
+      "real custom Gen 1-style art for 18 of the 21 forms (all except Starmie, Kangaskhan, and Mewtwo X/Y); the remaining 4 are placeholder recolors of each species' own vanilla sprite",
+      "a battle-only BLAZIKEN_MEGA record (Gen 3, not part of the real Kanto roster) for testing the mechanism against a species outside this mod's own scope -- requires a separate mod providing the real base BLAZIKEN species",
+    },
+
+    known = {
+      "no real Mega Stone trigger -- this engine has no held-item system at all, so the in-battle button is the substitute",
+      "enemy trainers never Mega Evolve -- player-only for now",
+      "4 of the 21 forms (Starmie, Kangaskhan, Mewtwo X/Y) are still placeholder recolors, not the real Mega designs -- most real Mega forms have genuine shape changes a recolor can't capture",
+      "Special is the average of Z-A's real Sp. Atk and Sp. Def for every form, rounded, since Gen 1 has one unified Special stat",
+      "catchRate/baseExp/growthRate/level1Moves are uniform placeholders across all 21 forms, since none of these fields are ever read for a species that's never caught, leveled, or taught a move",
+      "requires engine_internals: no hook exists for adding a menu option to the battle screen, so this wraps three core BattleState functions directly instead",
+    },
+  },
+
+  credits = {
+    { who = "Pokemon Legends: Z-A (Game Freak / Nintendo)", for_ = "Mega Evolution stats and designs" },
+    { who = "FrenchOrange (DeviantArt)", for_ = "Clefable and Raichu X/Y sprites -- free to use with credit" },
+    { who = "crystaldex.vercel.app", for_ = "Aerodactyl, Alakazam, Beedrill, Blastoise, Blaziken, Charizard X, Charizard Y, Venusaur, Gengar, and Pinsir sprites -- used with the site/artist's permission granted directly to the mod author" },
+    { who = "Pokemon Low Budget Crystal", for_ = "Slowbro, Victreebel, Gyarados, and Dragonite sprites" },
+  },
+
+  compat = { engine = ">=0.1.0 <1.0.0", modApi = 2 },
+}
