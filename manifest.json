@@ -1,0 +1,39 @@
+{
+  "id": "kanto_mega_evolutions",
+  "name": "Kanto Mega Evolutions",
+  "version": "1.0.0",
+  "api": 2,
+  "entry": "main.lua",
+  "category": "MECHANIC",
+  "game_version": ">=0.1.0 <1.0.0",
+  "dependencies": ["fairy_dark_steel_types"],
+  "permissions": ["engine_internals"],
+  "assets_transforms": "transforms.lua",
+  "summary": "Adds all 18 Kanto species with a Mega Evolution in Pokemon Legends Z-A (21 forms total, 3 with X/Y pairs), with real Z-A stats/typing and a Mega Evolve option in battle. Supersedes the standalone mega_charizard_x mod -- don't run both together.",
+  "author": "you",
+  "tags": ["mechanic", "battle-ui", "intermediate"],
+  "differences": [
+    "Registers 21 battle-only species records (stats/typing/sprite only -- never caught, seen, or encountered) for every Kanto Mega form in Pokemon Legends Z-A: Venusaur, Charizard X/Y, Blastoise, Beedrill, Pidgeot, Raichu X/Y, Alakazam, Slowbro, Gengar, Victreebel, Starmie, Clefable, Kangaskhan, Pinsir, Gyarados, Aerodactyl, Dragonite, Mewtwo X/Y",
+    "Depends on fairy_dark_steel_types for Gyarados's Dark typing and Clefable's Fairy typing",
+    "Overrides three core battle functions (BattleState.update, BattleState.drawTextArea, BattleState.draw), same engine_internals justification as mega_charizard_x (no hook exists for adding a menu option to the battle screen)",
+    "The MEGA indicator sits on the TYPE/PP box's decorative top border row now, not its interior text rows -- it no longer covers the type/PP readout",
+    "For Charizard, Raichu, and Mewtwo, pressing A on the indicator opens a second box asking X or Y before transforming; every other species transforms on a direct confirm",
+    "known: 14 of the 21 forms are placeholder recolors of each species' own vanilla sprite (see transforms.lua) -- real Mega designs mostly have genuine shape changes a recolor can't capture. Charizard X, Charizard Y, Venusaur, Blastoise, Raichu X, Raichu Y, and Clefable have real custom art",
+    "known: Special is the average of Z-A's real Sp. Atk and Sp. Def for every form, since Gen 1 has one unified Special stat -- not a real Legends: Z-A number for any of them",
+    "known: catchRate/baseExp/growthRate/level1Moves are uniform placeholders across all 21 forms, since none of these fields are ever read for a species that's never caught, leveled, or taught a move",
+    "known: no held-item system exists in this engine, so there's no real Mega Stone trigger -- the button is the substitute, same as mega_charizard_x",
+    "SUPERSEDES mega_charizard_x -- do not run both mods together, they would each independently wrap the same BattleState functions and conflict",
+    "BLAZIKEN_MEGA is included as a Mega record only, not the real Kanto roster -- Blaziken is Gen 3 (Hoenn). Requires a separate mod providing the real base BLAZIKEN species; real art now supplied",
+    "21 more DATA-ONLY non-Kanto Mega records added (Meganium, Feraligatr, Skarmory, Froslass, Emboar, Excadrill, Scolipede, Scrafty, Eelektross, Chandelure, Chesnaught, Delphox, Greninja, Pyroar, Malamar, Barbaracle, Dragalge, Hawlucha, Eternal Flower Floette, Drampa, Falinks, Zygarde Complete Form) -- same status as Blaziken: verified real Z-A stats/typing, no art, no base species, level1Moves are placeholder existing-Gen1-moves only, not these species' real Z-A movesets",
+    "32 more DATA-ONLY species covering the rest of the X/Y and ORAS roster added (Ampharos, Steelix, Scizor, Heracross, Houndoom, Tyranitar, Sceptile, Swampert, Gardevoir, Sableye, Mawile, Aggron, Medicham, Manectric, Sharpedo, Camerupt, Altaria, Banette, Absol, Glalie, Salamence, Metagross, Latias, Latios, Rayquaza, Lopunny, Garchomp, Lucario, Abomasnow, Gallade, Audino, Diancie) -- same data-only status. All per-entry level1Moves/learnset/evolutions fields removed across every data-only species (Blaziken included): confirmed these fields are unconditionally overridden by registerForm for every form regardless of what's set per-entry, so they were dead code from the start -- move-learning-on-levelup already works correctly off the permanent mon.species record, which this mod's Mega swap never touches",
+    "Summary/stats screen (PKMN -> STATS mid-battle) now shows the Mega-boosted Attack/Defense/Speed/Special and the Mega sprite while actively Mega Evolved -- previously read mon.stats/a sprite cached at open time, neither aware of the separate battle-only curStats/sprite fields Mega Evolution actually sets. HP is deliberately left alone -- Mega Evolution never changes HP in the real games either, confirmed",
+    "known: Mega Evolution cannot exist outside of battle by construction, not by an added safeguard -- confirmed directly that nothing in this mod or the engine's actual save-serialization files (SaveSerializer.lua, SaveData.lua) ever writes curStats/curTypes/megaActive back onto the permanent mon record or into a save. The battle.player object holding that state goes out of scope entirely once a battle ends; there's no lingering field to clear",
+    "FIXED crash: every data-only (non-Kanto) species (54 total, Blaziken included) was missing spriteFront/spriteBack -- both required fields in the schema, not optional -- since registerForm's fallback path expects an artPrefix for the recolor-placeholder pipeline these entries never had, and can't use anyway (that pipeline recolors an existing vanilla sprite, and these species have none in this Kanto-only engine). All 54 now point at one shared, obviously-fake placeholder image (assets/dataonly_placeholder.png) instead"
+  ],
+  "credits": [
+    "Mega Evolution stats and designs from Pokemon Legends: Z-A",
+    "Clefable and Raichu X/Y sprites: FrenchOrange (DeviantArt) -- https://www.deviantart.com/frenchorange -- 'free to use as long as proper credit is given', per the artist's own posted terms",
+    "Aerodactyl, Alakazam, Beedrill, Blastoise, Blaziken, Charizard X, Charizard Y, Venusaur, Gengar, and Pinsir sprites: sourced from crystaldex.vercel.app, used with the site/artist's permission granted directly to the mod author",
+    "Slowbro, Victreebel, Gyarados, and Dragonite sprites: from Pokemon Low Budget Crystal"
+  ]
+}
